@@ -65,8 +65,9 @@ const handleJumpClick = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
 
-const getScaleFromInitialViewport = (width, height) => {
-  return width > height ? 0.5 : 0.75;
+const getScaleFromProps = (width, height, pageNum) => {
+  if (pageNum === 1) return 0.6;
+  return width > height ? 0.62 : 0.8;
 };
 
 const whitelist = ["flowood", "dallas"];
@@ -113,9 +114,10 @@ const renderAds = async (old = false) => {
       let viewport = page.getViewport({ scale: 1 });
       if (window.innerWidth < 768) {
         console.log("adjusting scale for window width", window.innerWidth);
-        const scale = getScaleFromInitialViewport(
+        const scale = getScaleFromProps(
           viewport.width,
-          viewport.height
+          viewport.height,
+          pageNum
         );
         viewport = page.getViewport({ scale });
       }
