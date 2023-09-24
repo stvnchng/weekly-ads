@@ -22,9 +22,14 @@
     <link
       rel="stylesheet"
       href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css"
+      loading="lazy"
     />
   </head>
   <body>
+    <script
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
+    ></script>
     <div id="ads">
       <div
         class="fixed bottom-0 left-0 right-0 p-2 md:hidden z-40 bg-gray-200 rounded text-gray-800"
@@ -42,10 +47,6 @@
         <ul id="jump-menu-desktop" class="md:mt-0 md:block hidden"></ul>
       </nav>
     </div>
-    <script
-      async
-      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"
-    ></script>
-    <script defer src="main.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 pdfjsLib.GlobalWorkerOptions.workerSrc =
-  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js";
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
 const zones = {
   flowood: {
@@ -51,24 +51,6 @@ const zones = {
 const adsContainer = document.getElementById("ads");
 const jumpMenu = document.getElementById("jump-menu");
 const jumpMenuDesktop = document.getElementById("jump-menu-desktop");
-
-const formatDate = (d) => {
-  const YYYYMMdd = d.split("T")[0].split("-");
-  const month = YYYYMMdd[1];
-  const day = YYYYMMdd[2];
-  return `${month}/${day}`;
-};
-
-const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-
-const handleJumpClick = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-};
-
-const getScaleFromProps = (width, height, pageNum) => {
-  if (pageNum === 1) return 0.6;
-  return width > height ? 0.62 : 0.8;
-};
 
 const whitelist = ["flowood", "dallas"];
 
@@ -158,3 +140,21 @@ const renderAds = async (old = false) => {
 };
 
 renderAds();
+
+const formatDate = (d) => {
+  const YYYYMMdd = d.split("T")[0].split("-");
+  const month = YYYYMMdd[1];
+  const day = YYYYMMdd[2];
+  return `${month}/${day}`;
+};
+
+const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const handleJumpClick = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+};
+
+const getScaleFromProps = (width, height, pageNum) => {
+  if (pageNum === 1) return 0.6;
+  return width > height ? 0.62 : 0.8;
+};
