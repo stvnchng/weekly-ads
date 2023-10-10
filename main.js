@@ -46,6 +46,10 @@ const zones = {
     url: "https://dam.flippenterprise.net/flyerkit/publications/krogercentral?locale=en&access_token=b4fd9ba48a54993887670929ec0c5ece&show_storefronts=true&postal_code=61614&store_code=00917",
     path: "il/peoria",
   },
+  tomthumb: {
+    url: "https://api.flipp.com/flyerkit/v4.0/publications/tomthumb?access_token=f56887ada4be460fb13e028bf5de43f2&locale=en-US&postal_code=75080&store_code=2526",
+    path: "https://coupons.tomthumb.com/weeklyad?cmpid=lp_tth_wkad_ylp",
+  },
 };
 
 const adsContainer = document.getElementById("ads");
@@ -60,8 +64,10 @@ const renderAds = async (old = false) => {
     console.log("pdf response", response);
     const ad = !old
       ? response[0]
-      : data.find((ad, index) => index > 0 && ad.flyer_type === "weekly") ??
-        data[0];
+      : data.find(
+          (ad, index) =>
+            (index > 0 && ad.flyer_type === "weekly") || ad.name === "Weekly Ad"
+        ) ?? data[0];
     const pdfUrl = ad.pdf_url;
 
     const start = formatDate(ad.valid_from);
@@ -134,7 +140,20 @@ const renderAds = async (old = false) => {
     jumpMenu.appendChild(option);
   });
 
-  return Promise.all(promises);
+  await Promise.all(promises);
+
+  const iframeSrcs = [
+    // "https://www.aldi.us/en/weekly-specials/our-weekly-ads/",
+    "https://elranchoinc.com/weekly-ads-dallas/",
+  ];
+
+  iframeSrcs.forEach((src) => {
+    const iframe = document.createElement("iframe");
+    iframe.src = src;
+    iframe.className = "w-full aspect-video";
+    iframe.height = "900px";
+    adsContainer.appendChild(iframe);
+  });
 };
 
 renderAds();
