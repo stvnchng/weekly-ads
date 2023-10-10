@@ -56,18 +56,16 @@ const whitelist = ["flowood", "dallas"];
 
 const renderAds = async (old = false) => {
   const promises = Object.keys(zones).map(async (zone) => {
-    const adResponse = await fetch(zones[zone].url)
-      .then((res) => res.json())
-      .then((data) =>
-        !old
-          ? data[0]
-          : data.find((ad, index) => index > 0 && ad.flyer_type === "weekly") ??
-            data[0]
-      );
-    const pdfUrl = adResponse.pdf_url;
+    const response = await fetch(zones[zone].url).then((res) => res.json());
+    console.log("pdf response", response);
+    const ad = !old
+      ? response[0]
+      : data.find((ad, index) => index > 0 && ad.flyer_type === "weekly") ??
+        data[0];
+    const pdfUrl = ad.pdf_url;
 
-    const start = formatDate(adResponse.valid_from);
-    const end = formatDate(adResponse.valid_to);
+    const start = formatDate(ad.valid_from);
+    const end = formatDate(ad.valid_to);
 
     const loadingTask = pdfjsLib.getDocument(pdfUrl);
     const pdfDocument = await loadingTask.promise;
