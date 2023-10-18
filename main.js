@@ -142,18 +142,19 @@ const renderAds = async (old = false) => {
 
   await Promise.all(promises);
 
-  const iframeSrcs = [
-    // "https://www.aldi.us/en/weekly-specials/our-weekly-ads/",
-    "https://elranchoinc.com/weekly-ads-dallas/",
-  ];
+  // const iframeSrcs = [
+  //   // "https://www.aldi.us/en/weekly-specials/our-weekly-ads/",
+  //   "https://elranchoinc.com/weekly-ads-dallas/",
+  //   "https://zionmarket.com/weeklysale?state=tx",
+  // ];
 
-  iframeSrcs.forEach((src) => {
-    const iframe = document.createElement("iframe");
-    iframe.src = src;
-    iframe.className = "w-full aspect-video";
-    iframe.height = "900px";
-    adsContainer.appendChild(iframe);
-  });
+  // iframeSrcs.forEach((src) => {
+  //   const iframe = document.createElement("iframe");
+  //   iframe.src = src;
+  //   iframe.className = "w-full aspect-video";
+  //   iframe.height = "900px";
+  //   adsContainer.appendChild(iframe);
+  // });
 };
 
 renderAds();
