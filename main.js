@@ -61,15 +61,14 @@ const whitelist = ["flowood", "dallas"];
 const renderAds = async (old = false) => {
   const promises = Object.keys(zones).map(async (zone) => {
     const response = await fetch(zones[zone].url).then((res) => res.json());
-    console.log("pdf response", response);
-    const ad = !old
-      ? response[0]
-      : data.find(
-          (ad, index) =>
-            (index > 0 && ad.flyer_type === "weekly") || ad.name === "Weekly Ad"
-        ) ?? data[0];
-    const pdfUrl = ad.pdf_url;
+    const weeklyAds = response
+      .filter((ad) => ad.flyer_type === "weekly" || ad.name === "Weekly Ad")
+      .sort((a, b) => new Date(a.valid_to) - new Date(b.valid_to));
+    console.log(`ads for ${zone}`, weeklyAds);
 
+    const ad = !old ? weeklyAds.at(-1) : weeklyAds.at(0);
+
+    const pdfUrl = ad.pdf_url;
     const start = formatDate(ad.valid_from);
     const end = formatDate(ad.valid_to);
 
