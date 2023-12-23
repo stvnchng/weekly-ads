@@ -46,10 +46,10 @@ const zones = {
     url: "https://dam.flippenterprise.net/flyerkit/publications/krogercentral?locale=en&access_token=b4fd9ba48a54993887670929ec0c5ece&show_storefronts=true&postal_code=61614&store_code=00917",
     path: "il/peoria",
   },
-  tomthumb: {
-    url: "https://api.flipp.com/flyerkit/v4.0/publications/tomthumb?access_token=f56887ada4be460fb13e028bf5de43f2&locale=en-US&postal_code=75080&store_code=2526",
-    path: "https://coupons.tomthumb.com/weeklyad?cmpid=lp_tth_wkad_ylp",
-  },
+  // tomthumb: {
+  //   url: "https://api.flipp.com/flyerkit/v4.0/publications/tomthumb?access_token=f56887ada4be460fb13e028bf5de43f2&locale=en-US&postal_code=75080&store_code=2526",
+  //   path: "https://coupons.tomthumb.com/weeklyad?cmpid=lp_tth_wkad_ylp",
+  // },
 };
 
 const adsContainer = document.getElementById("ads");
