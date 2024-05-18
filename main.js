@@ -46,9 +46,37 @@ const zones = {
     url: "https://dam.flippenterprise.net/flyerkit/publications/krogercentral?locale=en&access_token=b4fd9ba48a54993887670929ec0c5ece&show_storefronts=true&postal_code=61614&store_code=00917",
     path: "il/peoria",
   },
-  // tomthumb: {
-  //   url: "https://api.flipp.com/flyerkit/v4.0/publications/tomthumb?access_token=f56887ada4be460fb13e028bf5de43f2&locale=en-US&postal_code=75080&store_code=2526",
-  //   path: "https://coupons.tomthumb.com/weeklyad?cmpid=lp_tth_wkad_ylp",
+  tomthumb: {
+    url: "https://api.flipp.com/flyerkit/v4.0/publications/tomthumb?access_token=f56887ada4be460fb13e028bf5de43f2&locale=en-US&postal_code=75080&store_code=2526",
+    path: "https://coupons.tomthumb.com/weeklyad?cmpid=lp_tth_wkad_ylp",
+  },
+  // arizonaSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=84037&store_code=00277",
+  //   path: "az/bullhead-city",
+  // },
+  // idahoSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=83318&store_code=00123",
+  //   path: "id/burley",
+  // },
+  // montanaSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=59718&store_code=00170",
+  //   path: "mt/bozeman",
+  // },
+  // newMexicoSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/krogercentral?locale=en&access_token=b4fd9ba48a54993887670929ec0c5ece&show_storefronts=true&postal_code=61614&store_code=00917",
+  //   path: "nm/albuquerque",
+  // },
+  // vegasSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=89106&store_code=00377",
+  //   path: "nv/las-vegas",
+  // },
+  // mormonSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=89106&store_code=00277",
+  //   path: "ut/kaysville",
+  // },
+  // wyomingSmith: {
+  //   url: "https://dam.flippenterprise.net/flyerkit/publications/smithsfoodanddrug?source=hosted2&locale=en&access_token=08afb47dca88689334e60150188b9b2e&show_storefronts=true&postal_code=82604&store_code=00185",
+  //   path: "wy/casper",
   // },
 };
 
@@ -65,6 +93,12 @@ const renderAds = async (old = false) => {
       .filter((ad) => ad.flyer_type === "weekly" || ad.name === "Weekly Ad")
       .sort((a, b) => new Date(a.valid_to) - new Date(b.valid_to));
     console.log(`ads for ${zone}`, weeklyAds);
+    // const getBaseUrl = (z) => {
+    //   if (z.includes("Smith")) {
+    //     return "https://www.smithsfoodanddrug.com/stores/grocery/";
+    //   }
+    //   return "https://www.kroger.com/stores/grocery/";
+    // };
 
     const ad = !old ? weeklyAds.at(-1) : weeklyAds.at(0);
 
@@ -82,7 +116,7 @@ const renderAds = async (old = false) => {
     const zoneLink = document.createElement("a");
     zoneLink.className =
       "text-blue-500 underline hover:text-blue-700 transition font-semibold";
-    zoneLink.href = `https://www.kroger.com/stores/grocery/${zones[zone].path}`;
+    zoneLink.href = getBaseUrl(zone) + zones[zone].path;
     zoneLink.target = "_blank";
     zoneLink.innerText = `${capitalize(zone)} ${start}-${end}`;
     zoneHeader.appendChild(zoneLink);
