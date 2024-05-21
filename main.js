@@ -93,12 +93,12 @@ const renderAds = async (old = false) => {
       .filter((ad) => ad.flyer_type === "weekly" || ad.name === "Weekly Ad")
       .sort((a, b) => new Date(a.valid_to) - new Date(b.valid_to));
     console.log(`ads for ${zone}`, weeklyAds);
-    // const getBaseUrl = (z) => {
-    //   if (z.includes("Smith")) {
-    //     return "https://www.smithsfoodanddrug.com/stores/grocery/";
-    //   }
-    //   return "https://www.kroger.com/stores/grocery/";
-    // };
+    const getBaseUrl = (z) => {
+      if (z.includes("Smith")) {
+        return "https://www.smithsfoodanddrug.com/stores/grocery/";
+      }
+      return "https://www.kroger.com/stores/grocery/";
+    };
 
     const ad = !old ? weeklyAds.at(-1) : weeklyAds.at(0);
 
